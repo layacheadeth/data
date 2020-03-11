@@ -1,0 +1,151 @@
+#include <iostream>
+#include<conio.h>
+using namespace std;
+class Node{
+	public:
+		string number{""};
+		Node* next{nullptr};
+		Node(string number);
+};
+
+class LinkedList{
+	private:
+		Node *head = nullptr;
+		Node * tail = nullptr;
+		static int length;
+	public:
+		void add(string number);
+		
+		void display();
+		void Delete(int n);
+		void sorts();
+		
+		
+		int getLength();
+};
+
+
+int main(int argc, char** argv) {
+	LinkedList list;
+	A:system("cls");
+	cout<<"1.add number\n";
+	cout<<"2.display number\n";
+	cout<<"3.delete number\n";
+	cout<<"4.sort number\n";
+	switch(getch()){
+	case '1':{string a;
+	int n;
+		system("cls");
+		cout<<"input n: ";cin>>n;
+		for(int i=0;i<n;i++){
+			list.add("078412013");
+}
+cout<<"do you want to exit(y) or go back to menu(e): ";cin>>a;
+	if(a=="e")
+	 goto A;
+}
+break;
+case '2':{string b;
+	system("cls");
+	list.display();
+	cout<<"press E to go back:  ";cin>>b;
+	if(b=="e")
+	 goto A;
+}
+break;
+case '3':{
+	string c;
+	system("cls");
+	list.Delete(30);
+	cout<<"press E to go back:  ";cin>>c;
+	if(c=="e")
+	 goto A;
+}
+break;
+case '4':{
+	string d;
+	system("cls");
+	list.sorts();
+	cout<<"press E to go back: ";cin>>d;
+	if(d=="e")
+	goto A;
+}
+break;
+	return 0;
+}
+}
+
+//Node::Node(string data) : data{data} , next{nullptr}{}
+Node::Node(string number){
+	this->number = number;
+}
+//Node<T>::Node(T data){
+//this->data=data;
+//this->next=nullptr;
+//}
+void LinkedList::add(string number){
+			cout<<"number: ";cin>>number;
+			
+			if (head == nullptr){
+				head = new Node(number);
+				tail = head;
+			}else{
+				Node* temp = new Node(number);
+				tail->next = temp;
+				tail = tail->next; 
+			}
+			length++;
+}
+
+void LinkedList::display(){
+			Node * temp = head;
+			while(temp != nullptr){
+				cout << temp->number << endl;
+				temp = temp->next;
+			}
+}
+void LinkedList::Delete(int n){
+	cout<<"input position number: ";cin>>n;
+	Node *temp1=head;
+	if(n==1){
+		head=temp1->next;
+		free(temp1);
+		return;
+	}
+	int i;
+	for(int i=0;i<n-2;i++)
+		temp1=temp1->next;
+	Node * temp2=temp1->next;
+	temp1->next=temp2->next;
+	free(temp2);
+}
+void LinkedList::sorts(){
+	int i;
+	do{
+		i=0;
+		Node* qtr=NULL,*ptr=head;
+		while(ptr->next!=qtr){
+			if(ptr->number>ptr->next->number){
+				
+				swap(ptr,ptr->next);
+				i=1;
+			}
+			ptr=ptr->next;
+		}
+		qtr=ptr;
+	}while( i);
+}
+void swap(Node *p,Node *q){
+	string temp;
+	temp=p->number;
+	p->number=q->number;
+	q->number=temp;
+}
+
+
+  
+int LinkedList::getLength(){
+	return length;
+}
+
+int LinkedList::length = 0;
